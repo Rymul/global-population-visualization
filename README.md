@@ -1,11 +1,12 @@
 Our Home By the Numbers
-------
+---
+---
 
 
-------------------------------------------------------
 
 Global Economic Data Visualization
-
+---
+---
 
 This project is an interactive view of key economic data across the globe.
 Containing GDP, GDP per capita, unemployment, consumer price index, and much more.
@@ -15,9 +16,11 @@ You can filter the visualization either by year or economic datum (will default 
 If you select a given country it will provide a table at the bottom of the globe with the
 associated data.
 
------------------------------------------------------
 
-In Our Home By the Numbers, users will be able to:
+
+In Our Home By the Numbers, users will be able to
+---
+---
 
 * Navigate the globe
 * Select individual countries to see their economic data
@@ -35,10 +38,12 @@ In addition, this project will include:
 *
 
 
-------------------------------------------------------
-Wireframe:
 
-![Alt text](./owbn_wireframe.png?raw=true "Wireframe")
+Wireframe
+---
+---
+
+![Alt text](./ohbn_wireframe.png?raw=true "Wireframe")
 
 * Nav contains links to Github repo, my LinkedIn, my personal website, and About section.
 * the center will contain an globe users can interact will to explore the data of our home.
@@ -48,18 +53,22 @@ Wireframe:
 * A table below the globe will populate with a selected country's associated data.
 
 
-------------------------------------------------------
+
 
 Technologies, Libraries, API's
+---
+---
 
 * Building this project I will use the Econ BD API
 * This project also uses the D3 library and Chart.js
 
 
-------------------------------------------------------
+
 
 
 Implementation Timeline
+---
+---
 
 * Friday & Weekend: Setup project, including getting webpack set up, get basic display to show
     on screen, do research into D3 and Chart.js, make sure fetching and using data from 
@@ -77,10 +86,12 @@ Implementation Timeline
     permits rewrite this as a production README.
 
 
--------------------------------------------------------
+
 
 
 Bonus Features
+---
+---
 
 * Enable click & drag to traverse globe, if not there will be a horizontal drag bar at the
     bottom of the globe.
