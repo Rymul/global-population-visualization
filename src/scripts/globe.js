@@ -1,5 +1,5 @@
 import { Versor } from './versor';
-import { colors } from './colors'
+// import { colors } from './colors'
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
 
@@ -10,23 +10,21 @@ export default async function createGlobe(){
 
     let canvas = d3.select("canvas"),
         current = d3.select("#current"),
-        // width = canvas.property("width"),
-        // height = canvas.property("height"),
         context = canvas.node().getContext("2d"),
         water = {type: 'Sphere'},
-        rotationDelay = 3000,
+        rotationDelay = 2000,
         scaleFactor = 0.9,
         degPerSec = 6,
         angles = { x: -20, y: 40, z: 0 },
-        colorCountry = '#a00',
-        colorCountries = "#fff",
+        colorCountry = '#755014', // #AE7417, #B9770E
+        colorBoarders = "#000",
         colorGraticule = "#ccc",
-        colorLand = "#000",
-        colorWater = "#fff",
+        colorLand = "#145A32",
+        colorWater = "#5DADE2",  // #3182bd
         graticule = d3.geoGraticule10(),
         lastTime = d3.now(),
         degPerMs = degPerSec / 1000,
-        width, height, land, countries, countryList, autorotate, diff, rotation,
+        width, height, land, countries, countryList, name, autorotate, diff, rotation,
         currentCountry,
         v0, // mouse position in Cartesian coordinates at start of drag gesture.
         r0, // Projection rotation as Euler angles at start.
@@ -41,43 +39,40 @@ export default async function createGlobe(){
         .projection(projection)
         .context(context);
 
-    
+
     function render() {
         context.clearRect(0, 0, width, height)
         fill(water, colorWater)
         stroke(graticule, colorGraticule)
         fill(land, colorLand)
-        stroke(countries, colorCountries)
+        stroke(countries, colorBoarders)
         if (currentCountry) {
-            console.log(currentCountry)
           fill(currentCountry, colorCountry)
         }
       }
       
-    //   context.beginPath(), path(countries), context.strokeStyle = '#fff', context.stroke();
-
-      function fill(obj, color) {
+    function fill(obj, color) {
         context.beginPath()
         path(obj)
         context.fillStyle = color
         context.fill()
-      }
+    }
       
-      function stroke(obj, color) {
+    function stroke(obj, color) {
         context.beginPath()
         path(obj)
         context.strokeStyle = color
         context.stroke()
+    }
+
+
+    function setAngles() {
+        let rotation = projection.rotate()
+        rotation[0] = angles.y
+        rotation[1] = angles.x
+        rotation[2] = angles.z
+        projection.rotate(rotation)
       }
-
-
-    // function setAngles() {
-    //     let rotation = projection.rotate()
-    //     rotation[0] = angles.y
-    //     rotation[1] = angles.x
-    //     rotation[2] = angles.z
-    //     projection.rotate(rotation)
-    //   }
       
     function scale() {
         width = document.documentElement.clientWidth
@@ -89,21 +84,21 @@ export default async function createGlobe(){
         render()
     }
 
-    // function rotate(elapsed) {
-    //     let now = d3.now();
-    //     diff = now - lastTime;
-    //     if (diff < elapsed) {
-    //         rotation = projection.rotate();
-    //         rotation[0] += diff * degPerMs
-    //         projection.rotate(rotation)
-    //         render()
-    //     }
-    //     lastTime = now
-    // }
+    function rotate(elapsed) {
+        let now = d3.now();
+        diff = now - lastTime;
+        if (diff < elapsed) {
+            rotation = projection.rotate();
+            rotation[0] += diff * degPerMs
+            projection.rotate(rotation)
+            render()
+        }
+        lastTime = now
+    }
 
-    // function startRotation(delay) {
-    //     autorotate.restart(rotate, delay || 0)
-    // }
+    function startRotation(delay) {
+        autorotate.restart(rotate, delay || 0)
+    }
 
 
     function dragstarted(e) {
@@ -154,7 +149,6 @@ export default async function createGlobe(){
     
     function mousemove(e) {
         let c = getCountry(e)
-        // console.log("mouse move", e)
         if (!c) {
           if (currentCountry) {
             leave(currentCountry)
@@ -171,8 +165,11 @@ export default async function createGlobe(){
         enter(c)
     }
 
+    // function clicked(e) {
+    //     let selectedCountry = mousemove(e)
+    // }
+
     function getCountry(event) {
-        console.log(event)
         let pos = projection.invert(d3.pointer(event))
         return countries.features.find(function(f) {
           return f.geometry.coordinates.find(function(c1) {
@@ -188,32 +185,15 @@ export default async function createGlobe(){
     // "https://unpkg.com/world-atlas@1/world/110m.json"
 
     try{
-        console.log(path.context())
         const world = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
         // let sphere = {type: "Sphere"},
+        console.log(world)
             land = topojson.feature(world, world.objects.land);
             countries = topojson.feature(world, world.objects.countries);
-
-            // canvas.selectAll('path').data(countries.features).enter()
-            // .append('path').attr('class', 'country').attr('d', path)
-            // .attr('data-name', ele => ele.properties.name);
-
-            // name = topojson.feature(world, world.objects.countries.geometries.properties)
-           
-
-        // const initialRender = function() {
-        //     context.clearRect(0, 0, width, height);
-           
-        //     context.beginPath(), path(sphere), context.fillStyle = "#12ADC1", context.fill();
-        //     context.beginPath(), path(land), context.fillStyle = "#000", context.fill();
-            // context.beginPath(), path(countries), context.strokeStyle = '#fff', context.stroke();
-        //     if (currentCountry) {
-        //         context.fill(currentCountry, colorCountry);
-        //     }
-        
-        // };
-        // console.log('hit this')
-        // initialRender();
+            // name = topojson.feature(countries, countries.features.properties);
+            console.log(countries)
+            // console.log(countries.features.properties.name)
+            // console.log(name)
     }catch(e){
         console.log(e)
     }
@@ -221,24 +201,27 @@ export default async function createGlobe(){
     
     try{
         const countryNames = await d3.tsv('https://gist.githubusercontent.com/mbostock/4090846/raw/07e73f3c2d21558489604a0bc434b3a5cf41a867/world-country-names.tsv')
+        console.log(countryNames)
         countryList = countryNames
     }catch(e){
         console.log(e)
     }
     
 
-
-    // setAngles()
+    setAngles()
 
     canvas.call(d3.drag()
     .on("start", dragstarted)
     .on("drag", dragged)
     .on("end", dragended)
     )
-    .on("mousemove", mousemove);
+    .on("mousemove", mousemove)
+    .on("click", mousemove) // make callback that invokes mousemove() and identifies country code and calls fetchData
+   
+       
   
 
     window.addEventListener('resize', scale)
     scale()
-    // autorotate = d3.timer(rotate)
+    autorotate = d3.timer(rotate)
 }
