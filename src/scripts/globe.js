@@ -1,8 +1,18 @@
 import { Versor } from './versor';
-// import { colors } from './colors'
+import { countryCodes } from '../data/countryCodes'
+import { fetchData } from './fetchData'
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
 
+
+export function getCountryCode(current) {
+    if(current && Object.keys(countryCodes).includes(current.text)) {
+        let countryCode = countryCodes[current.text]
+        return countryCode
+    } else {
+        alert("Data Unavailable")
+    }
+}
 
 export default async function createGlobe(){
 
@@ -130,6 +140,8 @@ export default async function createGlobe(){
     function leave(country){
         current.text('')
     }
+
+
 
     // https://github.com/d3/d3-polygon
     function polygonContains(polygon, point) {
