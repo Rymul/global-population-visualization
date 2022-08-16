@@ -13,18 +13,24 @@ export default async function createGlobe(){
         // width = canvas.property("width"),
         // height = canvas.property("height"),
         context = canvas.node().getContext("2d"),
+        water = {type: 'Sphere'},
         rotationDelay = 3000,
         scaleFactor = 0.9,
         degPerSec = 6,
         angles = { x: -20, y: 40, z: 0 },
         colorCountry = '#a00',
-        colorGraticule = '#ccc',
+        colorCountries = "#fff",
+        colorGraticule = "#ccc",
+        colorLand = "#000",
+        colorWater = "#fff",
         graticule = d3.geoGraticule10(),
         lastTime = d3.now(),
         degPerMs = degPerSec / 1000,
         width, height, land, countries, countryList, autorotate, diff, rotation,
-        currentCountry;
-
+        currentCountry,
+        v0, // mouse position in Cartesian coordinates at start of drag gesture.
+        r0, // Projection rotation as Euler angles at start.
+        q0; // Projection rotation as versor at start.
 
     let projection = d3.geoOrthographic()
         .scale((height - 10) / 2)
@@ -35,26 +41,43 @@ export default async function createGlobe(){
         .projection(projection)
         .context(context);
 
-
-
-    let render = function() {},
-        v0, // mouse position in Cartesian coordinates at start of drag gesture.
-        r0, // Projection rotation as Euler angles at start.
-        q0; // Projection rotation as versor at start.
-
-    // window.addEventListener('onclick', (e) => {
-    //     dragstarted(e)
-    //     dragged(e)
-    //     console.log('potato')
-    // });
-
-    function setAngles() {
-        let rotation = projection.rotate()
-        rotation[0] = angles.y
-        rotation[1] = angles.x
-        rotation[2] = angles.z
-        projection.rotate(rotation)
+    
+    function render() {
+        context.clearRect(0, 0, width, height)
+        fill(water, colorWater)
+        stroke(graticule, colorGraticule)
+        fill(land, colorLand)
+        stroke(countries, colorCountries)
+        if (currentCountry) {
+            console.log(currentCountry)
+          fill(currentCountry, colorCountry)
+        }
       }
+      
+    //   context.beginPath(), path(countries), context.strokeStyle = '#fff', context.stroke();
+
+      function fill(obj, color) {
+        context.beginPath()
+        path(obj)
+        context.fillStyle = color
+        context.fill()
+      }
+      
+      function stroke(obj, color) {
+        context.beginPath()
+        path(obj)
+        context.strokeStyle = color
+        context.stroke()
+      }
+
+
+    // function setAngles() {
+    //     let rotation = projection.rotate()
+    //     rotation[0] = angles.y
+    //     rotation[1] = angles.x
+    //     rotation[2] = angles.z
+    //     projection.rotate(rotation)
+    //   }
       
     function scale() {
         width = document.documentElement.clientWidth
@@ -66,21 +89,21 @@ export default async function createGlobe(){
         render()
     }
 
-    function rotate(elapsed) {
-        let now = d3.now();
-        diff = now - lastTime;
-        if (diff < elapsed) {
-            rotation = projection.rotate();
-            rotation[0] += diff * degPerMs
-            projection.rotate(rotation)
-            render()
-        }
-        lastTime = now
-    }
+    // function rotate(elapsed) {
+    //     let now = d3.now();
+    //     diff = now - lastTime;
+    //     if (diff < elapsed) {
+    //         rotation = projection.rotate();
+    //         rotation[0] += diff * degPerMs
+    //         projection.rotate(rotation)
+    //         render()
+    //     }
+    //     lastTime = now
+    // }
 
-    function startRotation(delay) {
-        autorotate.restart(rotate, delay || 0)
-    }
+    // function startRotation(delay) {
+    //     autorotate.restart(rotate, delay || 0)
+    // }
 
 
     function dragstarted(e) {
@@ -129,8 +152,9 @@ export default async function createGlobe(){
         return inside
   }
     
-    function mousemove() {
-        let c = getCountry(this)
+    function mousemove(e) {
+        let c = getCountry(e)
+        // console.log("mouse move", e)
         if (!c) {
           if (currentCountry) {
             leave(currentCountry)
@@ -148,6 +172,7 @@ export default async function createGlobe(){
     }
 
     function getCountry(event) {
+        console.log(event)
         let pos = projection.invert(d3.pointer(event))
         return countries.features.find(function(f) {
           return f.geometry.coordinates.find(function(c1) {
@@ -165,33 +190,30 @@ export default async function createGlobe(){
     try{
         console.log(path.context())
         const world = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
-        let sphere = {type: "Sphere"},
+        // let sphere = {type: "Sphere"},
             land = topojson.feature(world, world.objects.land);
-        countries = topojson.feature(world, world.objects.countries);
+            countries = topojson.feature(world, world.objects.countries);
 
             // canvas.selectAll('path').data(countries.features).enter()
             // .append('path').attr('class', 'country').attr('d', path)
             // .attr('data-name', ele => ele.properties.name);
 
             // name = topojson.feature(world, world.objects.countries.geometries.properties)
+           
 
-            console.log(countries)
-            // console.log(name)
-
-        render = function() {
-            context.clearRect(0, 0, width, height);
-            // context.stroke(graticule, colorGraticule);
-            context.beginPath(), path(sphere), context.fillStyle = "#12ADC1", context.fill();
-            context.beginPath(), path(land), context.fillStyle = "#000", context.fill();
-            context.beginPath(), path(countries), context.strokeStyle = '#fff', context.stroke();
-            if (currentCountry) {
-                context.fill(currentCountry, colorCountry);
-            }
-            // context.beginPath(), path('804'), context.fillStyle = '#FF8C00' , context.fill();
-            // context.beginPath(), path(sphere), context.stroke();
-        };
-        console.log('hit this')
-        render();
+        // const initialRender = function() {
+        //     context.clearRect(0, 0, width, height);
+           
+        //     context.beginPath(), path(sphere), context.fillStyle = "#12ADC1", context.fill();
+        //     context.beginPath(), path(land), context.fillStyle = "#000", context.fill();
+            // context.beginPath(), path(countries), context.strokeStyle = '#fff', context.stroke();
+        //     if (currentCountry) {
+        //         context.fill(currentCountry, colorCountry);
+        //     }
+        
+        // };
+        // console.log('hit this')
+        // initialRender();
     }catch(e){
         console.log(e)
     }
@@ -204,9 +226,9 @@ export default async function createGlobe(){
         console.log(e)
     }
     
-    // console.log(render)
 
-    setAngles()
+
+    // setAngles()
 
     canvas.call(d3.drag()
     .on("start", dragstarted)
@@ -218,5 +240,5 @@ export default async function createGlobe(){
 
     window.addEventListener('resize', scale)
     scale()
-    autorotate = d3.timer(rotate)
+    // autorotate = d3.timer(rotate)
 }
