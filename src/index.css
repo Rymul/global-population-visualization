@@ -25,3 +25,18 @@ h1 {
 h2 {
   color: aliceblue;
 }
+
+.table {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.data-table {
+  height: 200px;
+  width: 500px;
+  border: solid 2px;
+  border-color: aliceblue;
+
+  color: aliceblue;
+}

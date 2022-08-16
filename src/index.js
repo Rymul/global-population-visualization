@@ -2,6 +2,8 @@
 import { fetchData } from './scripts/fetchData';
 import { countryCodes } from './data/countryCodes';
 import { Versor } from './scripts/versor';
+import { initLRUCache } from './scripts/lruCache'
+import { generateTable, generateTableHead } from './scripts/dataTable'
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
 
@@ -13,7 +15,8 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     // createGlobe()
 
     const allCountryData = {},
-          versor = new Versor()
+          versor = new Versor(),
+          table = document.querySelector('.data-table');
 
     let canvas = d3.select("canvas"),
         current = d3.select("#current"),
@@ -188,9 +191,13 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         let c = getCountry(event)
         let name = enter(c)
         let countryCode = getCountryCode(name)
-        const currentCountryData = await fetchData(countryCode);
-        Object.assign(allCountryData, currentCountryData);
+        if(!Object.keys(allCountryData).includes(countryCode)){
+            const currentCountryData = await fetchData(countryCode);
+            Object.assign(allCountryData, currentCountryData);
+        }
         console.log('data', allCountryData)
+
+        generateTable(table, allCountryData);
     }
 
     function getCountry(event) {
@@ -215,7 +222,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             land = topojson.feature(world, world.objects.land);
             countries = topojson.feature(world, world.objects.countries);
             // name = topojson.feature(countries, countries.features.properties);
-            console.log(countries)
+            // console.log(countries)
             // console.log(countries.features.properties.name)
             // console.log(name)
     }catch(e){
@@ -225,7 +232,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     
     try{
         const countryNames = await d3.tsv('https://gist.githubusercontent.com/mbostock/4090846/raw/07e73f3c2d21558489604a0bc434b3a5cf41a867/world-country-names.tsv')
-        console.log(countryNames)
+        // console.log(countryNames)
         countryList = countryNames
     }catch(e){
         console.log(e)
@@ -241,6 +248,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     )
     .on("mousemove", mousemove)
     .on("click", loadCountryData)
+    // .on("click", generateTable)
    
        
   
@@ -248,6 +256,10 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     window.addEventListener('resize', scale)
     scale()
     autorotate = d3.timer(rotate)
+
+
+    generateTableHead(table);
+    
 
 });
 
