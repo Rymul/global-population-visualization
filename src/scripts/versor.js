@@ -1,7 +1,7 @@
 
 
 export class Versor{
-    constructor(e){
+    constructor(){ // I had e in here
         this.acos = Math.acos,
         this.asin = Math.asin,
         this.atan2 = Math.atan2,
@@ -15,6 +15,7 @@ export class Versor{
         this.degrees = 180 / this.PI;
     }
 
+   
     versor(e){
         let l = e[0] / 2 * this.radians, 
             p = e[1] / 2 * this.radians, 
