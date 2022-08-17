@@ -3,7 +3,7 @@ import { fetchData } from './scripts/fetchData';
 import { countryCodes } from './data/countryCodes';
 import { Versor } from './scripts/versor';
 import { initLRUCache } from './scripts/lruCache'
-import { generateTable, generateTableHead } from './scripts/dataTable'
+import { generateTable, generateTableHead, deleteTable } from './scripts/dataTable'
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
 
@@ -186,17 +186,22 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             alert("Data Unavailable")
         }
     }
-
+    
     async function loadCountryData(event){
         let c = getCountry(event)
         let name = enter(c)
         let countryCode = getCountryCode(name)
+        console.log(countryCode,"taylor swift")
         if(!Object.keys(allCountryData).includes(countryCode)){
             const currentCountryData = await fetchData(countryCode);
             Object.assign(allCountryData, currentCountryData);
         }
         console.log('data', allCountryData)
 
+        let count = document.querySelector('thead').children.length
+        if (count > 3){
+            deleteTable(table)
+        }
         generateTable(table, allCountryData);
     }
 
@@ -253,13 +258,12 @@ window.addEventListener('DOMContentLoaded', async (event) => {
        
   
 
-    window.addEventListener('resize', scale)
-    scale()
-    autorotate = d3.timer(rotate)
+    window.addEventListener('resize', scale);
+    scale();
+    autorotate = d3.timer(rotate);
 
-
-    generateTableHead(table);
     
+    generateTableHead(table);
 
 });
 
