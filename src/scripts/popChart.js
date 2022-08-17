@@ -14,14 +14,13 @@ export const makeChart = async (allCountryData, countryCode) => {
     //If no chart exist, we need to create a new canvs
   if(!canvas){
     d3.select('body')
-      .append('div').attr('class', 'popChart')
-      d3.select('.popChart')
+    //   .append('div').attr('class', 'popChart')
+    //   d3.select('.popChart')
       .append('div').attr('class', 'modalContainer')
       d3.select('.modalContainer')
       .append('canvas').attr('id', 'chart')
     d3.select('.modalContainer')
-      .append('button').attr('class','close').text('X')
-    d3.select('.close').on('click'), //deleteChart(canvas) )
+
 
     canvas = document.getElementById('chart')
     //If a chart does exist we need to delete the old canvas and create a new one
@@ -33,9 +32,13 @@ export const makeChart = async (allCountryData, countryCode) => {
     canvas = document.getElementById('chart')
   }
 
-  const deleteChart = function(canvas){
-    canvas.remove()
-  }
+//   const deleteChart = function(canvas){
+//     canvas.remove()
+//     const button = d3.select('.close')
+//     button.remove()
+//     const cover = d3.select('.cover')
+//     cover.style("opacity", 0 )
+//   }
 
     let ctx = canvas.getContext('2d')
     const labels = Object.keys(chartData);
@@ -45,6 +48,7 @@ export const makeChart = async (allCountryData, countryCode) => {
         label: 'Population in Thousands',
         data: Object.values(chartData),
         fill: true,
+        backgroundColor: 'rgba(39, 134, 218, 0.3)',
         borderColor: 'rgb(75, 192, 192)',
         tension: 0.1,
         // xAxisID: 'Year',
@@ -85,8 +89,8 @@ export const makeChart = async (allCountryData, countryCode) => {
 
     const layout = {
         padding: {
-          bottom: 20,
-          left: 20
+          bottom: 50,
+          left: 50
         }
       }
 
@@ -101,7 +105,9 @@ export const makeChart = async (allCountryData, countryCode) => {
             font: font
         }
     }
+    
 
+    
     const popChart = new Chart(ctx, {
         type: 'line',
         data: data,
@@ -114,4 +120,5 @@ export const makeChart = async (allCountryData, countryCode) => {
             layout: layout
         }
     })
+
 }    

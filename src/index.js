@@ -13,12 +13,13 @@ import * as topojson from "topojson-client";
 
 window.addEventListener('DOMContentLoaded', async (event) => {
     console.log('The Dom hath Loaded');
-    // createGlobe()
+
     
 
     const allCountryData = {},
           versor = new Versor(),
-          table = document.querySelector('.data-table');
+        //   table = document.querySelector('.data-table'),
+          cover = d3.select('.cover');
 
     let canvas = d3.select("canvas"),
         current = d3.select("#current"),
@@ -200,17 +201,9 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             Object.assign(allCountryData, currentCountryData);
         }
 
-        // console.log('ALL COUNTRY OBJ', allCountryData)
-        // console.log('Country Code', countryCode)
-        // console.log('US Obj', allCountryData[countryCode])
-
         makeChart(allCountryData, countryCode)
-
-        // let count = document.querySelector('thead').children.length
-        // if (count > 3){
-        //     deleteTable(table)
-        // }
-        // generateTable(table, allCountryData);
+        const cover = d3.select('.cover')
+        cover.style("opacity", 0.6 ).style('pointer-events', 'auto')
     }
 
     function getCountry(event) {
@@ -222,22 +215,20 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             })
           })
         })
-      }
+    }
     
+    function deleteModal(e) {
+        const canvas = d3.select('#chart')
+        canvas.remove()
+        cover.style('opacity', 0).style('pointer-events', 'none')
+        console.log("it worked")
+    }
 
-    // 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
-    // "https://unpkg.com/world-atlas@1/world/110m.json"
 
     try{
-        const world = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
-        // let sphere = {type: "Sphere"},
-        // console.log(world)
+        const world = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')  
             land = topojson.feature(world, world.objects.land);
             countries = topojson.feature(world, world.objects.countries);
-            // name = topojson.feature(countries, countries.features.properties);
-            // console.log(countries)
-            // console.log(countries.features.properties.name)
-            // console.log(name)
     }catch(e){
         console.log(e)
     }
@@ -245,7 +236,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     
     try{
         const countryNames = await d3.tsv('https://gist.githubusercontent.com/mbostock/4090846/raw/07e73f3c2d21558489604a0bc434b3a5cf41a867/world-country-names.tsv')
-        // console.log(countryNames)
+       
         countryList = countryNames
     }catch(e){
         console.log(e)
@@ -261,7 +252,9 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     )
     .on("mousemove", mousemove)
     .on("click", loadCountryData)
-    // .on("click", generateTable)
+    
+    cover.on("click", deleteModal)
+   
    
        
   
@@ -270,8 +263,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     scale();
     autorotate = d3.timer(rotate);
 
-    
-    // generateTableHead(table);
+
 
 });
 
