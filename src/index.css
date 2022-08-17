@@ -26,17 +26,28 @@ h2 {
   color: aliceblue;
 }
 
-.table {
+
+
+.popChart {
+  position: absolute;
+  top: 20%;
+  height: 100%;
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  
+
 }
 
-.data-table {
-  height: 200px;
-  width: 500px;
-  border: solid 2px;
-  border-color: aliceblue;
-
+#chart {
   color: aliceblue;
+  height: 50%;
+  width: 50%;
+  border: solid 5px white;
+  background-color: rgba(51, 61, 71, 0.9);
+  /* background-color: rgba(0, 0, 0, .3); */
+}
+
+.close {
+  color: black;
 }

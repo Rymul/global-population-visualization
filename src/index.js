@@ -4,6 +4,7 @@ import { countryCodes } from './data/countryCodes';
 import { Versor } from './scripts/versor';
 import { initLRUCache } from './scripts/lruCache'
 import { generateTable, generateTableHead, deleteTable } from './scripts/dataTable'
+import { makeChart } from './scripts/popChart';
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
 
@@ -13,6 +14,7 @@ import * as topojson from "topojson-client";
 window.addEventListener('DOMContentLoaded', async (event) => {
     console.log('The Dom hath Loaded');
     // createGlobe()
+    
 
     const allCountryData = {},
           versor = new Versor(),
@@ -135,7 +137,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             return parseInt(c.id, 10) === parseInt(country.id, 10)
         })
         current.text(countryName && countryName.name || '')
-        console.log('countryName', countryName)
+        // console.log('countryName', countryName)
         return countryName && countryName.name || ''
     }
 
@@ -181,6 +183,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     function getCountryCode(countryName) {
         if(countryName && Object.keys(countryCodes).includes(countryName)) {
             let countryCode = countryCodes[countryName]
+            // console.log(countryCode)
             return countryCode
         } else {
             alert("Data Unavailable")
@@ -191,18 +194,23 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         let c = getCountry(event)
         let name = enter(c)
         let countryCode = getCountryCode(name)
-        console.log(countryCode,"taylor swift")
+        
         if(!Object.keys(allCountryData).includes(countryCode)){
             const currentCountryData = await fetchData(countryCode);
             Object.assign(allCountryData, currentCountryData);
         }
-        console.log('data', allCountryData)
 
-        let count = document.querySelector('thead').children.length
-        if (count > 3){
-            deleteTable(table)
-        }
-        generateTable(table, allCountryData);
+        // console.log('ALL COUNTRY OBJ', allCountryData)
+        // console.log('Country Code', countryCode)
+        // console.log('US Obj', allCountryData[countryCode])
+
+        makeChart(allCountryData, countryCode)
+
+        // let count = document.querySelector('thead').children.length
+        // if (count > 3){
+        //     deleteTable(table)
+        // }
+        // generateTable(table, allCountryData);
     }
 
     function getCountry(event) {
@@ -223,7 +231,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     try{
         const world = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
         // let sphere = {type: "Sphere"},
-        console.log(world)
+        // console.log(world)
             land = topojson.feature(world, world.objects.land);
             countries = topojson.feature(world, world.objects.countries);
             // name = topojson.feature(countries, countries.features.properties);
@@ -263,7 +271,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     autorotate = d3.timer(rotate);
 
     
-    generateTableHead(table);
+    // generateTableHead(table);
 
 });
 
