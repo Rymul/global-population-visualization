@@ -195,15 +195,23 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         let c = getCountry(event)
         let name = enter(c)
         let countryCode = getCountryCode(name)
+       
         
         if(!Object.keys(allCountryData).includes(countryCode)){
             const currentCountryData = await fetchData(countryCode);
             Object.assign(allCountryData, currentCountryData);
         }
+        let chartData = allCountryData[countryCode]
+        // console.log(allCountryData)
+        // console.log(countryCode, "CODE")
+        // console.log(allCountryData.countryCode, "HDHDHDHD")
 
-        makeChart(allCountryData, countryCode)
-        const cover = d3.select('.cover')
-        cover.style("opacity", 0.6 ).style('pointer-events', 'auto')
+        // console.log(Object.values(chartData), "CHART DATA")
+        // if (!Object.values(chartData) === 'Data Unavailable'){
+            makeChart(allCountryData, countryCode)
+            const cover = d3.select('.cover')
+            cover.style("opacity", 0.6 ).style('pointer-events', 'auto')
+        // }
     }
 
     function getCountry(event) {
@@ -220,6 +228,8 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     function deleteModal(e) {
         const canvas = d3.select('#chart')
         canvas.remove()
+        const modalCont = d3.select('.modalContainer')
+        modalCont.remove()
         cover.style('opacity', 0).style('pointer-events', 'none')
         console.log("it worked")
     }

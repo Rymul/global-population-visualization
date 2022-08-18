@@ -7,7 +7,7 @@ import { geoBounds } from 'd3'
 export const makeChart = async (allCountryData, countryCode) => {
 
     let chartData = allCountryData[countryCode]
-    console.log(chartData)
+    // console.log(chartData)
 
     let canvas = document.getElementById('chart')
 
@@ -89,8 +89,10 @@ export const makeChart = async (allCountryData, countryCode) => {
 
     const layout = {
         padding: {
-          bottom: 50,
-          left: 50
+          bottom: 20,
+          left: 20,
+          right: 20,
+          top: 20
         }
       }
 

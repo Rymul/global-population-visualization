@@ -9,8 +9,8 @@ html, body {
 
 .globe {
   cursor: move;
-  opacity: 0;
-  
+  height: 50%;
+  width: 50%;
 }
 
 #current {
@@ -21,8 +21,16 @@ html, body {
   margin-top: 4%;
 }
 
+.title-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 h1 {
   color: aliceblue;
+  
 }
 
 h2 {
@@ -32,42 +40,33 @@ h2 {
 .cover {
   position: absolute;
   top: 0;
-  height: 100rem;
+  height: 100vh;
   width: 100vw;
   background-color: black;
   opacity: 0;
   pointer-events: none;
 }
 
-.popChart{
+.modalContainer{
   height: 100vh;
-  width: 100vw;
+  width: 75vw;
+  top: 0;
+  display: fixed;
+  justify-content: center;
+  margin: auto;
 }
 
 #chart {
   position: absolute;
   top: 20%;
   height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  width: 50%;
+  background-color: rgba(51, 61, 71, 0.9);
+  border-radius: 20px;
+  /* display: flex;
+  justify-content: center; */
   
 
 }
 
-#chart {
-  color: aliceblue;
-  height: 50%;
-  width: 50%;
-  background-color: rgba(51, 61, 71, 0.9);
-  /* background-color: rgba(0, 0, 0, .3); */
-}
 
-.close {
-  color: black;
-
-}
-
-/* * {
-  background-color: black;
-} */

@@ -1,0 +1,69 @@
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+html, body {
+  margin: 0;
+  padding: 0;
+  /* background: rgb(63, 49, 49); */
+  background-image: url("https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80");
+  /* background-color: black; */
+}
+
+.globe {
+  cursor: move;
+  height: 50%;
+  width: 50%;
+}
+
+#current {
+  position: absolute;
+  color: rgb(255, 255, 255);
+  font-family: sans-serif;
+  margin-left: 4%;
+  margin-top: 4%;
+}
+
+.title-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  color: aliceblue;
+}
+
+h2 {
+  color: aliceblue;
+}
+
+.cover {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modalContainer {
+  height: 100vh;
+  width: 75vw;
+  top: 0;
+  display: fixed;
+  justify-content: center;
+  margin: auto;
+}
+
+#chart {
+  position: absolute;
+  top: 20%;
+  height: 100%;
+  width: 50%;
+  background-color: rgba(51, 61, 71, 0.9);
+  border-radius: 20px;
+  /* display: flex;
+  justify-content: center; */
+}
