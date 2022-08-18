@@ -2,8 +2,9 @@
 import { fetchData } from './scripts/fetchData';
 import { countryCodes } from './data/countryCodes';
 import { Versor } from './scripts/versor';
-import { initLRUCache } from './scripts/lruCache'
-import { generateTable, generateTableHead, deleteTable } from './scripts/dataTable'
+import { initLRUCache } from './scripts/lruCache';
+import { generateTable, generateTableHead, deleteTable } from './scripts/dataTable';
+// import { instructions } from './scripts/instructions'
 import { makeChart } from './scripts/popChart';
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
@@ -13,6 +14,7 @@ import * as topojson from "topojson-client";
 
 window.addEventListener('DOMContentLoaded', async (event) => {
     console.log('The Dom hath Loaded');
+
 
     
 
@@ -270,7 +272,12 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     .on("click", loadCountryData)
     
     cover.on("click", deleteModal)
-   
+
+    const instructions = document.querySelector(".instructionModal")
+   instructions.addEventListener("click", () => {
+    instructions.style.opacity = '0'
+    instructions.style.pointerEvents = 'none'
+   })
    
        
   

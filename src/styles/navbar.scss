@@ -1,8 +1,5 @@
 .main-nav {
-    // display: flex;
-    // flex-direction: row;
-    // justify-content: space-between;
-    // padding: 10px;
+
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -25,38 +22,22 @@ a {
     height: 50%;
     width: 100%;
   
-  }
+}
   
-  i {
-      color: aliceblue;
-    //   background-color: aliceblue;
-      font-size: 30px;
-      height: 100%;
-      width: 5%;
-    }
-  
-      // flex-direction: row;
-      // justify-content: space-between;
-      // background-color: rgba(0, 0, 0, 0.1);
-      // height: 5vh; 
-      // align-items: end;
-      // position: fixed;
-      // width: 100vw;
-  
-      // > div {
-      //   color: aliceblue;
-        // background-color: aliceblue;
-    
-      // }
-  
-  
-  // .nav-bar {
-  //   // display: flex;
-  //   // flex-direction: row;
-  //   // align-items: center;
-  //   // justify-content: space-between;
-  //   display: flex;
-  //   justify-content: space-evenly;
-  //   width: 20%;
+i {
+    color: aliceblue;
+//   background-color: aliceblue;
+    font-size: 30px;
+    height: 100%;
+    width: 5%;
+    transition: 300ms;
+}
+
+i:hover {
+    scale: 1.25;
+    color: rgb(188, 224, 255);
+}
+
+   
   
     

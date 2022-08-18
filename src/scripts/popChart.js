@@ -32,28 +32,19 @@ export const makeChart = async (allCountryData, countryCode, name) => {
     canvas = document.getElementById('chart')
   }
 
-//   const deleteChart = function(canvas){
-//     canvas.remove()
-//     const button = d3.select('.close')
-//     button.remove()
-//     const cover = d3.select('.cover')
-//     cover.style("opacity", 0 )
-//   }
 
     let ctx = canvas.getContext('2d')
     const labels = Object.keys(chartData);
     const data = {
-    labels: labels,
-    datasets: [{
-        label: 'Population in Thousands',
+      labels: labels,
+      datasets: [{
+        label: 'Population',
         data: Object.values(chartData),
         fill: true,
         backgroundColor: 'rgba(39, 134, 218, 0.3)',
         borderColor: 'rgb(75, 192, 192)',
         tension: 0.1,
-        // xAxisID: 'Year',
-        // yAxisID: 'Population'
-    }]
+      }]
     }
 
     const font = {
