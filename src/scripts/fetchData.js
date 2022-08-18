@@ -72,7 +72,7 @@ const cleanData = (dataAsJson, country) => {
             val = parseInt(values[i]);
             
         if (val > 1000000 && (country !== 'LU' && country !== 'MO' && country !== 'NP' )){
-            val = Math.floor(val / 100)
+            val = Math.floor(val / 1000)
         }
 
         if ( month === 1 ){

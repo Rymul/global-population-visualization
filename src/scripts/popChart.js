@@ -4,7 +4,7 @@ import * as d3 from 'd3'
 import { geoBounds } from 'd3'
 
 // feed it Object.keys(allCountriesObj.US)
-export const makeChart = async (allCountryData, countryCode) => {
+export const makeChart = async (allCountryData, countryCode, name) => {
 
     let chartData = allCountryData[countryCode]
     // console.log(chartData)
@@ -102,7 +102,7 @@ export const makeChart = async (allCountryData, countryCode) => {
         },
         title: {
             display: true,
-            text: "Population",
+            text: `Population of the ${name}`,
             color: '#fff',
             font: font
         }

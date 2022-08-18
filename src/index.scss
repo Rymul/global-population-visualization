@@ -7,10 +7,42 @@ html, body {
 }
 
 
-.globe {
-  cursor: move;
-  height: 50%;
-  width: 50%;
+// .globe {
+//   cursor: move;
+//   height: 50%;
+//   width: 50%;
+// }
+
+.main-nav {
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-between;
+  // padding: 10px;
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgba(157, 157, 159, 0.7);
+    height: 5vh; 
+    align-items: end;
+    position: fixed;
+    width: 100vw;
+}
+
+.nav-bar > ul {
+  // display: flex;
+  // flex-direction: row;
+  // align-items: center;
+  // justify-content: space-between;
+  display: flex;
+  justify-content: space-evenly;
+  width: 20%;
+
+  > li {
+    color: aliceblue;
+    background-color: aliceblue;
+
+  }
+
 }
 
 #current {
@@ -23,19 +55,17 @@ html, body {
 
 .title-div {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-h1 {
+.title {
   color: aliceblue;
+  text-align: center;
   
 }
 
-h2 {
-  color: aliceblue;
-}
 
 .cover {
   position: absolute;
@@ -48,7 +78,9 @@ h2 {
 }
 
 .modalContainer{
-  height: 100vh;
+  // height: 100vh;
+  // width: 75vw;
+  height: 1px;
   width: 75vw;
   top: 0;
   display: fixed;
@@ -66,7 +98,6 @@ h2 {
   /* display: flex;
   justify-content: center; */
   
-
 }
 
 

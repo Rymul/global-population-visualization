@@ -186,9 +186,9 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             let countryCode = countryCodes[countryName]
             // console.log(countryCode)
             return countryCode
-        } else {
-            alert("Data Unavailable")
-        }
+        } //else {
+        //     alert("Data Unavailable")
+        // }
     }
     
     async function loadCountryData(event){
@@ -200,18 +200,22 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         if(!Object.keys(allCountryData).includes(countryCode)){
             const currentCountryData = await fetchData(countryCode);
             Object.assign(allCountryData, currentCountryData);
-        }
+        } 
         let chartData = allCountryData[countryCode]
         // console.log(allCountryData)
         // console.log(countryCode, "CODE")
         // console.log(allCountryData.countryCode, "HDHDHDHD")
 
-        // console.log(Object.values(chartData), "CHART DATA")
-        // if (!Object.values(chartData) === 'Data Unavailable'){
-            makeChart(allCountryData, countryCode)
+        console.log(Object.values(chartData).length, "CHART DATA LENGTH")
+        console.log(Object.values(chartData), "CHART DATA")
+
+        if (Object.values(chartData).length > 1){
+            makeChart(allCountryData, countryCode, name)
             const cover = d3.select('.cover')
             cover.style("opacity", 0.6 ).style('pointer-events', 'auto')
-        // }
+        } else {
+            alert("Data Unavailable")
+        }
     }
 
     function getCountry(event) {
