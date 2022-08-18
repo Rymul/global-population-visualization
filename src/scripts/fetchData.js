@@ -13,27 +13,14 @@ export const fetchData = async (countryCode, args = dataCodes) => {
     const singleCountryData = {}
     singleCountryData[countryCode] = {}
 
-    // console.log(countryCode,"taylor swift")
-    // let dCODE = args.toString()
-    // console.log(dCODE,"HDHDHDHD swift")
-    // if ( dCODE === "GDP"){
-    //     console.log('SUCESSS')
-    // }
-
-
     for(const code of args){
         const data = await fetch(`https://www.econdb.com/api/series/${code}${countryCode}/?format=json`)
         if (data.ok){
             const dataAsJson = await data.json()
            
             const clean = cleanData(dataAsJson, countryCode)
-            // console.log(countryCode, 'COUNTRY')
-            // console.log(clean, 'New parsed data')
-            // console.log(`DATES ${code}`, dataAsJson.data)
-            console.log(`VALUES ${code}`, dataAsJson.data.values)
            
             checkData(dataAsJson) ? 
-                // singleCountryData[countryCode][code] = dataAsJson.data : 
                 singleCountryData[countryCode] = clean : 
                 singleCountryData[countryCode] = errorMessageObj
         } else {
