@@ -2,21 +2,15 @@
 import { fetchData } from './scripts/fetchData';
 import { countryCodes } from './data/countryCodes';
 import { Versor } from './scripts/versor';
-import { initLRUCache } from './scripts/lruCache';
-import { generateTable, generateTableHead, deleteTable } from './scripts/dataTable';
-// import { instructions } from './scripts/instructions'
 import { makeChart } from './scripts/popChart';
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
 
 
- 
-
 window.addEventListener('DOMContentLoaded', async (event) => {
   
     const allCountryData = {},
           versor = new Versor(),
-        //   table = document.querySelector('.data-table'),
           cover = d3.select('.cover');
 
     let canvas = d3.select("canvas"),
@@ -40,6 +34,11 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         v0, // mouse position in Cartesian coordinates at start of drag gesture.
         r0, // Projection rotation as Euler angles at start.
         q0; // Projection rotation as versor at start.
+
+    // let projection = d3.geoOrthographic()
+    //     .scale((height - 10) / 2)
+    //     .translate([width / 2, height / 2])
+    //     .precision(0.1);
 
     let projection = d3.geoOrthographic()
         .scale((height - 10) / 2)
@@ -85,17 +84,16 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         projection.rotate(rotation)
       }
       
+
     function scale() {
-        // width = document.documentElement.clientWidth
-        // height = document.documentElement.clientHeight
         width = document.documentElement.clientWidth / 1.3
         height = document.documentElement.clientHeight / 1.3
         canvas.attr('width', width).attr('height', height)
         projection
-            .scale((scaleFactor * Math.min(width, height)) / 2)
-            .translate([width / 2, height / 2])
+          .scale((scaleFactor * Math.min(width, height)) / 2)
+          .translate([width / 2, height / 2])
         render()
-    }
+      }
 
     function rotate(elapsed) {
         let now = d3.now();
@@ -127,6 +125,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         projection.rotate(r1);
         render();
     }
+
 
     function dragended(e) {
         startRotation(rotationDelay)
@@ -160,7 +159,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         x0 = x1, y0 = y1
         }
         return inside
-  }
+    }
     
     function mousemove(e) {
         let c = getCountry(e)
@@ -247,7 +246,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     }
     
 
-    setAngles()
+    setAngles();
 
     canvas.call(d3.drag()
     .on("start", dragstarted)
@@ -259,20 +258,16 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     
     cover.on("click", deleteModal)
 
-    const instructions = document.querySelector(".instructionModal")
-   instructions.addEventListener("click", () => {
-    instructions.style.opacity = '0'
-    instructions.style.pointerEvents = 'none'
+    const instructions = document.querySelector(".instructionModal");
+    instructions.addEventListener("click", () => {
+    instructions.style.opacity = '0';
+    instructions.style.pointerEvents = 'none';
    })
    
        
-  
-
     window.addEventListener('resize', scale);
     scale();
     autorotate = d3.timer(rotate);
-
-
 
 });
 

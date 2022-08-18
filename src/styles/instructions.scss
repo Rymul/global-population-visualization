@@ -1,13 +1,15 @@
 
 .instructionModal {
-    height: 100vh;
+    // height: 100vh;
+    height: 113vh;
     width: 100vw;
     position: absolute;
     background-color: rgba(0,0,0,0.6);
     display: flex;
     align-items: center;
     transition: 800ms;
-    margin-top: -53rem;
+    // margin-top: -53rem;
+    margin-top: -100vh;
 
 
 }
@@ -34,4 +36,5 @@
 
 p {
     margin: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

@@ -1,6 +1,5 @@
-// need to make this an object with country codes as keys and values of country names
+// need to make this an object with country names as keys and values of country codes
 
-// countryCodes['AE'] 
 
     export const countryCodes = {
         'United Arab Emirates': 'AE',

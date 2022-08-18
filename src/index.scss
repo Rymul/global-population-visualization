@@ -8,9 +8,10 @@
 html, body {
   margin: 0;
   padding: 0;
-  /* background: rgb(63, 49, 49); */
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
   background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80');
-  /* background-color: black; */
 }
 
 

@@ -56,14 +56,14 @@ table {
 }
 
 .instructionModal {
-  height: 100vh;
+  height: 113vh;
   width: 100vw;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   transition: 800ms;
-  margin-top: -53rem;
+  margin-top: -100vh;
 }
 
 .instructions {
@@ -87,6 +87,7 @@ table {
 
 p {
   margin: 30px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .main-nav {
@@ -182,11 +183,12 @@ p {
 .cover {
   position: absolute;
   top: 0;
-  height: 100vh;
-  width: 100vw;
   background-color: black;
   opacity: 0;
   pointer-events: none;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 
 .globe-container {
@@ -216,7 +218,8 @@ p {
 html, body {
   margin: 0;
   padding: 0;
-  /* background: rgb(63, 49, 49); */
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
   background-image: url("https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80");
-  /* background-color: black; */
 }
