@@ -212,7 +212,7 @@ p {
   width: 50%;
   background-color: rgba(51, 61, 71, 0.9);
   border-radius: 20px;
-  transition: 300ms;
+  transition: 300ms ease-in-out;
 }
 
 html, body {

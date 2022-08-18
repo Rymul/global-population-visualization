@@ -1,4 +1,4 @@
-
+// Inspired by Version 0.0.0. Copyright 2017 Mike Bostock
 
 export class Versor{
     constructor(){ // I had e in here
@@ -15,7 +15,7 @@ export class Versor{
         this.degrees = 180 / this.PI;
     }
 
-   
+   // Returns the unit quaternion for the given Euler rotation angles [λ, φ, γ].
     versor(e){
         let l = e[0] / 2 * this.radians, 
             p = e[1] / 2 * this.radians, 
@@ -35,20 +35,23 @@ export class Versor{
         ];
     }
 
+    // Returns Cartesian coordinates [x, y, z] given spherical coordinates [λ, φ].
     cartesian(e) {
         let l = e[0] * this.radians, p = e[1] * this.radians,
             cp = this.cos(p);
         return [cp * this.cos(l), cp * this.sin(l), this.sin(p)];
       }
 
+    // Returns the Euler rotation angles [λ, φ, γ] for the given quaternion.
     rotation(q) {
         return [
        this.atan2(2 * (q[0] * q[1] + q[2] * q[3]), 1 - 2 * (q[1] * q[1] + q[2] * q[2])) * this.degrees,
        this.asin(this.max(-1, this.min(1, 2 * (q[0] * q[2] - q[3] * q[1])))) * this.degrees,
-       this.atan2(2 * (q[0] * q[3] + q[1] * q[2]), 1 - 2 * (q[2] * q[2] + q[3] * q[3])) *this.degrees
+       this.atan2(2 * (q[0] * q[3] + q[1] * q[2]), 1 - 2 * (q[2] * q[2] + q[3] * q[3])) * this.degrees
         ];
     }
 
+    // Returns the quaternion to rotate between two cartesian points on the sphere.
     delta(v0, v1) {
         let w = this.cross(v0, v1), l = this.sqrt(this.dot(w, w));
         if (!l) return [1, 0, 0, 0];
@@ -56,6 +59,8 @@ export class Versor{
         return [this.cos(t), w[2] / l * s, -w[1] / l * s, w[0] / l * s];
     }
 
+    
+    // Returns the quaternion that represents q0 * q1.
     multiply(q0, q1) {
         return [
           q0[0] * q1[0] - q0[1] * q1[1] - q0[2] * q1[2] - q0[3] * q1[3],

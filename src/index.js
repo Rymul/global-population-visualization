@@ -20,7 +20,8 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         rotationDelay = 2000,
         scaleFactor = 0.9,
         degPerSec = 6,
-        angles = { x: -20, y: 40, z: 0 },
+        // angles = { x: -20, y: 40, z: 0 },
+        angles = { x: 0, y: 0, z: 0 },
         colorCountry = '#755014', // #AE7417, #B9770E
         colorBoarders = "#000",
         colorGraticule = "#ccc",
@@ -34,11 +35,6 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         v0, // mouse position in Cartesian coordinates at start of drag gesture.
         r0, // Projection rotation as Euler angles at start.
         q0; // Projection rotation as versor at start.
-
-    // let projection = d3.geoOrthographic()
-    //     .scale((height - 10) / 2)
-    //     .translate([width / 2, height / 2])
-    //     .precision(0.1);
 
     let projection = d3.geoOrthographic()
         .scale((height - 10) / 2)
@@ -116,12 +112,14 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         v0 = versor.cartesian(projection.invert(d3.pointer(e)));
         r0 = projection.rotate();
         q0 = versor.versor(r0);
+        
     }
 
     function dragged(e) {
         let v1 = versor.cartesian(projection.rotate(r0).invert(d3.pointer(e))),
             q1 = versor.multiply(q0, versor.delta(v0, v1)),
             r1 = versor.rotation(q1);
+         
         projection.rotate(r1);
         render();
     }
@@ -134,7 +132,11 @@ window.addEventListener('DOMContentLoaded', async (event) => {
 
     function enter(country){
         let countryName = countryList.find(c => {
-            return parseInt(c.id, 10) === parseInt(country.id, 10)
+            if (c !== undefined && country !== undefined){
+                return parseInt(c.id, 10) === parseInt(country.id, 10)
+            } else {
+                return false
+            }
         })
         current.text(countryName && countryName.name || '')
         return countryName && countryName.name || ''

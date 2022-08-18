@@ -49,26 +49,29 @@ const cleanData = (dataAsJson, country) => {
     
     const data = {}
     let dates = dataAsJson.data.dates,
-        values = dataAsJson.data.values,
-        c = country.toString();
-    
-    for (let i = 0; i < dates.length; i++){
-        let strYear = parseInt(dates[i].slice(0, 4)),
-            strMonth = parseInt(dates[i].slice(5, 7)),
-            year = parseInt(strYear),
-            month = parseInt(strMonth),
-            val = parseInt(values[i]);
-            
-        if (c === 'CN') {
-            val = val * 10000  
-        } else if (val < 1000000 && (country.toString() !== 'LU' && country.toString() !== 'MO' && country.toString() !== 'NP' )){
-            val = val * 1000 
-        }     
+        values = dataAsJson.data.values;
 
-        if ( month === 1 ){
-            data[year] = val
+        if (country !== undefined){
+               let c = country.toString();
+            
+            for (let i = 0; i < dates.length; i++){
+                let strYear = parseInt(dates[i].slice(0, 4)),
+                    strMonth = parseInt(dates[i].slice(5, 7)),
+                    year = parseInt(strYear),
+                    month = parseInt(strMonth),
+                    val = parseInt(values[i]);
+                    
+                if (c === 'CN') {
+                    val = val * 10000  
+                } else if (val < 1000000 && (country.toString() !== 'LU' && country.toString() !== 'MO' && country.toString() !== 'NP' )){
+                    val = val * 1000 
+                }     
+
+                if ( month === 1 ){
+                    data[year] = val
+                }
+            }
         }
-    }
     
     return data
 }
