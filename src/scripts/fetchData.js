@@ -30,7 +30,7 @@ export const fetchData = async (countryCode, args = dataCodes) => {
             // console.log(countryCode, 'COUNTRY')
             // console.log(clean, 'New parsed data')
             // console.log(`DATES ${code}`, dataAsJson.data)
-            // console.log(`VALUES ${code}`, dataAsJson.data.values)
+            console.log(`VALUES ${code}`, dataAsJson.data.values)
            
             checkData(dataAsJson) ? 
                 // singleCountryData[countryCode][code] = dataAsJson.data : 
@@ -62,7 +62,8 @@ const cleanData = (dataAsJson, country) => {
     
     const data = {}
     let dates = dataAsJson.data.dates,
-        values = dataAsJson.data.values;
+        values = dataAsJson.data.values,
+        c = country.toString();
     
     for (let i = 0; i < dates.length; i++){
         let strYear = parseInt(dates[i].slice(0, 4)),
@@ -71,13 +72,16 @@ const cleanData = (dataAsJson, country) => {
             month = parseInt(strMonth),
             val = parseInt(values[i]);
             
-        if (val > 1000000 && (country !== 'LU' && country !== 'MO' && country !== 'NP' )){
-            val = Math.floor(val / 1000)
-        }
+        if (c === 'CN') {
+            val = val * 10000  
+        } else if (val < 1000000 && (country.toString() !== 'LU' && country.toString() !== 'MO' && country.toString() !== 'NP' )){
+            val = val * 1000 
+        }     
 
         if ( month === 1 ){
             data[year] = val
         }
     }
+    
     return data
 }

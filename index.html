@@ -1,41 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="globe.ico">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./dist/main.css">
     <script src="./dist/main.js" ></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
     <title>Our World by the Numbers</title>
 </head>
 <body>
-    <header class="main-nav">
-        <nav class="nav-bar">
-            <ul>
-                <li id="linkedIn">
-                    <a href="https://www.linkedin.com/in/ryanfmullen/">
-                        <i class="fa-brands fa-linkedin"></i>
-                    </a>
-                </li>
-                <li id="github">
-                    <a href="https://github.com/Rymul">
-                        <i class="fa-brands fa-github"></i>
-                    </a>
-                </li>
-                <li id="portfolio">
-                    <a href="https://github.com/Rymul">
-                        <span>Portfolio</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+    <div class="main-nav">
+        <!-- <nav class="nav-bar"> -->
+            <div id="linkedIn">
+                <a href="https://www.linkedin.com/in/ryanfmullen/">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            <div id="github">
+                <a href="https://github.com/Rymul">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <div id="portfolio">
+                <a href="https://github.com/Rymul">
+                    <i class="fas fa-portrait"></i>
+                </a>
+            </div>
+        <!-- </nav> -->
         
-    </header>
-    <div class="title-div">
-        <h1 class="title">Our World by the Numbers</h1>
-        <h2 class="title" id="current"></h2>
     </div>
-    <canvas width="960" height="600" id="globe"></canvas>
+    <div class="title-div">
+        
+        <h1 class="title">Our World by the Numbers</h1>
+    </div>
+    <div class="instructions">
+        <p class="instrcutions-text">Select a country to explore it's population</p>
+    </div>
+    <div class="country-div">
+        <h2 class="country" id="current"></h2>
+    </div>
+
+
+    <div class="globe-container">
+        <canvas width="960" height="600" id="globe"></canvas>
+    </div>
+    
     
     <div class="cover"></div>
 </body>

@@ -1,33 +1,87 @@
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
-html, body {
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
   margin: 0;
   padding: 0;
-  /* background: rgb(63, 49, 49); */
-  background-image: url("https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80");
-  /* background-color: black; */
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 .main-nav {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: rgba(157, 157, 159, 0.7);
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
   height: 5vh;
-  align-items: end;
-  position: fixed;
   width: 100vw;
+  position: fixed;
+}
+.main-nav > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 5%;
 }
 
-.nav-bar > ul {
-  display: flex;
-  justify-content: space-evenly;
-  width: 20%;
+a {
+  height: 50%;
+  width: 100%;
 }
-.nav-bar > ul > li {
+
+i {
   color: aliceblue;
-  background-color: aliceblue;
+  font-size: 30px;
+  height: 100%;
+  width: 5%;
 }
 
 #current {
@@ -48,6 +102,37 @@ html, body {
 .title {
   color: aliceblue;
   text-align: center;
+  margin: 50px;
+  font-size: 50px;
+}
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+p {
+  color: aliceblue;
+  text-align: center;
+  margin: 50px;
+  font-size: 20px;
+}
+
+.country-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.country {
+  color: aliceblue;
+  text-align: center;
+  margin: 50px;
+  font-size: 20px;
 }
 
 .cover {
@@ -58,6 +143,11 @@ html, body {
   background-color: black;
   opacity: 0;
   pointer-events: none;
+}
+
+.globe-container {
+  display: flex;
+  justify-content: center;
 }
 
 .modalContainer {
@@ -78,4 +168,12 @@ html, body {
   border-radius: 20px;
   /* display: flex;
   justify-content: center; */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  /* background: rgb(63, 49, 49); */
+  background-image: url("https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80");
+  /* background-color: black; */
 }

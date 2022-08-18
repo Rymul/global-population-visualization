@@ -1,7 +1,7 @@
 
 import Chart from 'chart.js/auto'
 import * as d3 from 'd3'
-import { geoBounds } from 'd3'
+// import { geoBounds } from 'd3'
 
 // feed it Object.keys(allCountriesObj.US)
 export const makeChart = async (allCountryData, countryCode, name) => {
@@ -75,7 +75,7 @@ export const makeChart = async (allCountryData, countryCode, name) => {
         },
         yAxis: {
             title: {
-                text: 'Population in Thousands',
+                text: 'Population',
                 display: true,
                 color: '#fff',
                 font: font

@@ -88,8 +88,10 @@ window.addEventListener('DOMContentLoaded', async (event) => {
       }
       
     function scale() {
-        width = document.documentElement.clientWidth
-        height = document.documentElement.clientHeight
+        // width = document.documentElement.clientWidth
+        // height = document.documentElement.clientHeight
+        width = document.documentElement.clientWidth / 1.3
+        height = document.documentElement.clientHeight / 1.3
         canvas.attr('width', width).attr('height', height)
         projection
             .scale((scaleFactor * Math.min(width, height)) / 2)
@@ -206,8 +208,8 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         // console.log(countryCode, "CODE")
         // console.log(allCountryData.countryCode, "HDHDHDHD")
 
-        console.log(Object.values(chartData).length, "CHART DATA LENGTH")
-        console.log(Object.values(chartData), "CHART DATA")
+        // console.log(Object.values(chartData).length, "CHART DATA LENGTH")
+        // console.log(Object.values(chartData), "CHART DATA")
 
         if (Object.values(chartData).length > 1){
             makeChart(allCountryData, countryCode, name)
