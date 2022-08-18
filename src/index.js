@@ -13,11 +13,7 @@ import * as topojson from "topojson-client";
  
 
 window.addEventListener('DOMContentLoaded', async (event) => {
-    console.log('The Dom hath Loaded');
-
-
-    
-
+  
     const allCountryData = {},
           versor = new Versor(),
         //   table = document.querySelector('.data-table'),
@@ -142,7 +138,6 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             return parseInt(c.id, 10) === parseInt(country.id, 10)
         })
         current.text(countryName && countryName.name || '')
-        // console.log('countryName', countryName)
         return countryName && countryName.name || ''
     }
 
@@ -188,11 +183,8 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     function getCountryCode(countryName) {
         if(countryName && Object.keys(countryCodes).includes(countryName)) {
             let countryCode = countryCodes[countryName]
-            // console.log(countryCode)
             return countryCode
-        } //else {
-        //     alert("Data Unavailable")
-        // }
+        } 
     }
     
     async function loadCountryData(event){
@@ -206,12 +198,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             Object.assign(allCountryData, currentCountryData);
         } 
         let chartData = allCountryData[countryCode]
-        // console.log(allCountryData)
-        // console.log(countryCode, "CODE")
-        // console.log(allCountryData.countryCode, "HDHDHDHD")
 
-        // console.log(Object.values(chartData).length, "CHART DATA LENGTH")
-        // console.log(Object.values(chartData), "CHART DATA")
 
         if (Object.values(chartData).length > 1){
             makeChart(allCountryData, countryCode, name)
@@ -239,7 +226,6 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         const modalCont = d3.select('.modalContainer')
         modalCont.remove()
         cover.style('opacity', 0).style('pointer-events', 'none')
-        console.log("it worked")
     }
 
 
@@ -290,12 +276,3 @@ window.addEventListener('DOMContentLoaded', async (event) => {
 
 });
 
-
-
-
-
-
-
-
-
-// console.log('Garret Sucks');

@@ -7,7 +7,7 @@ import * as d3 from 'd3'
 export const makeChart = async (allCountryData, countryCode, name) => {
 
     let chartData = allCountryData[countryCode]
-    // console.log(chartData)
+    
 
     let canvas = document.getElementById('chart')
 
@@ -50,6 +50,7 @@ export const makeChart = async (allCountryData, countryCode, name) => {
     const font = {
         weight: 'bold',
         size: 14
+      
     }
 
     const scales = {
@@ -82,7 +83,7 @@ export const makeChart = async (allCountryData, countryCode, name) => {
         padding: {
           bottom: 20,
           left: 20,
-          right: 20,
+          right: 35,
           top: 20
         }
       }

@@ -15,14 +15,14 @@
 }
 
 .modalContainer{
-  // height: 100vh;
-  // width: 75vw;
+
   height: 1px;
   width: 75vw;
   top: 0;
   display: fixed;
   justify-content: center;
   margin: auto;
+  // transition: 300ms;
 }
 
 #chart {
@@ -32,8 +32,7 @@
   width: 50%;
   background-color: rgba(51, 61, 71, 0.9);
   border-radius: 20px;
-  /* display: flex;
-  justify-content: center; */
+  transition: 300ms;
   
 }
 
