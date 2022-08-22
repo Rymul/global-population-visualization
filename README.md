@@ -25,11 +25,11 @@ In Our Home By the Numbers, users will be able to:
 
 
 
-Wireframe:
+Demo:
 ---
 ---
+![project-demo](https://user-images.githubusercontent.com/65626651/186016582-7ddfab1d-1d58-4b2e-88c5-c1d6d6cf3e11.gif)
 
-![Alt text](./ohbn_wireframe.png?raw=true "Wireframe")
 
 * The nav bar contains links to my Github repo, my LinkedIn, and my personal website.
 * The instructions on how to use the visualization will appear when the project is launched.
