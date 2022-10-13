@@ -82,8 +82,8 @@ window.addEventListener('DOMContentLoaded', async (event) => {
       
 
     function scale() {
-        width = document.documentElement.clientWidth / 1.3
-        height = document.documentElement.clientHeight / 1.3
+        width = document.documentElement.clientWidth /// 1.3
+        height = document.documentElement.clientHeight /// 1.3
         canvas.attr('width', width).attr('height', height)
         projection
           .scale((scaleFactor * Math.min(width, height)) / 2)
@@ -206,7 +206,15 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             const cover = d3.select('.cover')
             cover.style("opacity", 0.6 ).style('pointer-events', 'auto')
         } else {
-            alert("Data Unavailable")
+            const dataUnavailable = document.querySelector('.noDataModal');
+            const noDataText = document.querySelector('.dataUnavailable');
+            dataUnavailable.style.opacity = '1'
+            dataUnavailable.style.pointerEvents = 'auto'
+            noDataText.innerHTML = `Data Unavailable for ${name}` 
+            dataUnavailable.addEventListener("click", () => {
+            dataUnavailable.style.opacity = '0';
+            dataUnavailable.style.pointerEvents = 'none';
+    })
         }
     }
 
@@ -264,7 +272,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     instructions.addEventListener("click", () => {
     instructions.style.opacity = '0';
     instructions.style.pointerEvents = 'none';
-   })
+    })
    
        
     window.addEventListener('resize', scale);

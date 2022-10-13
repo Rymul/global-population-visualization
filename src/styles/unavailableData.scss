@@ -1,0 +1,49 @@
+
+.noDataModal {
+    // height: 100vh;
+    height: 113vh;
+    width: 100vw;
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    // align-items: center;
+    justify-content: end;
+    transition: 800ms;
+    // margin-top: -53rem;
+    // margin-top: -100vh;
+    top: 0%;
+
+
+}
+
+.noData {
+    display: flex;
+    justify-content: end;
+    height: 10vh;
+    width: 100vw;
+    margin-top: 7rem;
+    margin-left: 0rem;
+    // top: 0%;
+}
+
+.noData div {
+    border: solid 1px;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // border-color: aliceblue;
+    border-radius: 20px;
+    background-color:  rgba(0,0,0,0.7);
+    // margin: 100px;
+    // width: 39vw;
+    // top: 0%;
+
+
+}
+
+.noData div p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

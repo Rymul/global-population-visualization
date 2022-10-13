@@ -90,6 +90,42 @@ p {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.noDataModal {
+  height: 113vh;
+  width: 100vw;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: end;
+  transition: 800ms;
+  top: 0%;
+}
+
+.noData {
+  display: flex;
+  justify-content: end;
+  height: 10vh;
+  width: 100vw;
+  margin-top: 7rem;
+  margin-left: 0rem;
+}
+
+.noData div {
+  border: solid 1px;
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.noData div p {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .main-nav {
   display: flex;
   flex-direction: row;
