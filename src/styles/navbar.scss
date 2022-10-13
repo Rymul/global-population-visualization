@@ -8,15 +8,24 @@
     width: 100vw;
     position: fixed;
   
-    > div {
-      // color: aliceblue;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      width: 5%;
-    }
+    // > div {
+    //   // color: aliceblue;
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    //   height: 100%;
+    //   width: 5%;
+    // }
 }
+
+#linkedIn, #github, #portfolio {
+    // color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 5%;
+  }
 
 a {
     height: 50%;
@@ -30,14 +39,45 @@ i {
     font-size: 30px;
     height: 100%;
     width: 5%;
-    transition: 300ms;
+    // transition: 300ms;
+    transition: all .25s ease-in-out;
 }
 
 i:hover {
-    scale: 1.25;
+    // scale: 1.25;
     color: rgb(188, 224, 255);
+    transform: translateY(-2px);
 }
 
    
   
+.fix-globe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 10%;
+    margin-right: 3%;
+    margin-top: 0.6%;
     
+}
+
+.fix-globe-button {
+    background-color:aliceblue;
+    height: 65%; 
+    width: 100%;
+    border-radius: 5px;
+    font-size: 17px;
+    font-weight: 900;
+    border: none;
+    align-content: center;
+    // transition: 300ms;
+    transition: all .25s ease-in-out;
+    cursor: pointer;
+}
+
+.fix-globe-button:hover {
+    // scale: 1.1;
+    background-color: rgb(188, 224, 255);
+    transform: translateY(-2px);
+}

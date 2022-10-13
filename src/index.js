@@ -15,6 +15,8 @@ window.addEventListener('DOMContentLoaded', async (event) => {
 
     let canvas = d3.select("canvas"),
         current = d3.select("#current"),
+        // width = canvas.property("width"),
+        // height = canvas.property("height"),
         context = canvas.node().getContext("2d"),
         water = {type: 'Sphere'},
         rotationDelay = 2000,
@@ -49,6 +51,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     function render() {
         context.clearRect(0, 0, width, height)
         fill(water, colorWater)
+        // water.style.pointerEvents = "none";
         stroke(graticule, colorGraticule)
         fill(land, colorLand)
         stroke(countries, colorBoarders)
@@ -82,8 +85,8 @@ window.addEventListener('DOMContentLoaded', async (event) => {
       
 
     function scale() {
-        width = document.documentElement.clientWidth /// 1.3
-        height = document.documentElement.clientHeight /// 1.3
+        width = document.documentElement.clientWidth / 1.3
+        height = document.documentElement.clientHeight / 1.3
         canvas.attr('width', width).attr('height', height)
         projection
           .scale((scaleFactor * Math.min(width, height)) / 2)
@@ -119,7 +122,6 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         let v1 = versor.cartesian(projection.rotate(r0).invert(d3.pointer(e))),
             q1 = versor.multiply(q0, versor.delta(v0, v1)),
             r1 = versor.rotation(q1);
-         
         projection.rotate(r1);
         render();
     }
@@ -205,6 +207,8 @@ window.addEventListener('DOMContentLoaded', async (event) => {
             makeChart(allCountryData, countryCode, name)
             const cover = d3.select('.cover')
             cover.style("opacity", 0.6 ).style('pointer-events', 'auto')
+        } else if (!name){
+            return
         } else {
             const dataUnavailable = document.querySelector('.noDataModal');
             const noDataText = document.querySelector('.dataUnavailable');
@@ -255,9 +259,18 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         console.log(e)
     }
     
-
+    
+    function fixGlobe(e) {
+        let rotation = projection.rotate()
+        rotation[0] = 40
+        rotation[1] = -20
+        rotation[2] = 0
+        projection.rotate(rotation)
+    }
+    
     setAngles();
-
+    
+    
     canvas.call(d3.drag()
     .on("start", dragstarted)
     .on("drag", dragged)
@@ -267,7 +280,9 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     .on("click", loadCountryData)
     
     cover.on("click", deleteModal)
-
+    const fixGlobeButton = document.querySelector(".fix-globe-button")
+    fixGlobeButton.addEventListener("click", fixGlobe)
+    
     const instructions = document.querySelector(".instructionModal");
     instructions.addEventListener("click", () => {
     instructions.style.opacity = '0';
