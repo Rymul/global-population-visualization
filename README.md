@@ -48,27 +48,6 @@ Technologies, Libraries, API's:
 * Google fonts API
 
 
-
-Implementation Timeline:
----
----
-
-* Friday & Weekend: Setup project, including getting webpack set up, get basic display to show
-    on screen, do research into D3 and Chart.js, make sure fetching and using data from 
-    Econ DB API is working.
-
-* Monday: Organize data to be able to display on globe and build globe. Ensure it is rendering
-    on screen.
-
-* Tuesday: Build functionality of drop down, nav bar, and description sections. Start to build
-    data table under globe.
-
-* Wednesday: If not complete finish constructing data table. Focus on styling.
-
-* Thursday: Add finishing touches to make project functional and visually pleasing. If time
-    permits rewrite this as a production README.
-
-
 Bonus Features:
 ---
 ---
