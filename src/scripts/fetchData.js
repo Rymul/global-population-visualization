@@ -12,14 +12,11 @@ const errorMessageObj = { error: 'Data Unavailable' }
 export const fetchData = async (countryCode, args = dataCodes) => {
     const singleCountryData = {}
     singleCountryData[countryCode] = {}
-
     for(const code of args){
         const data = await fetch(`https://www.econdb.com/api/series/${code}${countryCode}/?format=json`)
         if (data.ok){
             const dataAsJson = await data.json()
-           
             const clean = cleanData(dataAsJson, countryCode)
-           
             checkData(dataAsJson) ? 
                 singleCountryData[countryCode] = clean : 
                 singleCountryData[countryCode] = errorMessageObj
@@ -27,7 +24,6 @@ export const fetchData = async (countryCode, args = dataCodes) => {
             singleCountryData[countryCode] = errorMessageObj
         }
     }
-    
     return singleCountryData
 }
 
@@ -46,32 +42,26 @@ const checkData = (dataAsJson) => {
 } 
 
 const cleanData = (dataAsJson, country) => {
-    
     const data = {}
     let dates = dataAsJson.data.dates,
         values = dataAsJson.data.values;
-
         if (country !== undefined){
-               let c = country.toString();
-            
+            let c = country.toString();
             for (let i = 0; i < dates.length; i++){
                 let strYear = parseInt(dates[i].slice(0, 4)),
                     strMonth = parseInt(dates[i].slice(5, 7)),
                     year = parseInt(strYear),
                     month = parseInt(strMonth),
-                    val = parseInt(values[i]);
-                    
+                    val = parseInt(values[i]); 
                 if (c === 'CN') {
                     val = val * 10000  
                 } else if (val < 1000000 && (country.toString() !== 'LU' && country.toString() !== 'MO' && country.toString() !== 'NP' )){
                     val = val * 1000 
                 }     
-
                 if ( month === 1 ){
                     data[year] = val
                 }
             }
         }
-    
     return data
 }
