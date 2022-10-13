@@ -1,4 +1,4 @@
-# Our Home By the Numbers
+# Our World By the Numbers
 ---
 ---
 
@@ -15,7 +15,7 @@ By selecting a country, a graph will appear showing the population over the time
 
 
 
-In Our Home By the Numbers, users are able to:
+In Our World By the Numbers, users are able to:
 ---
 ---
 
@@ -42,8 +42,8 @@ Demo:
 
 
 * The nav bar contains links to my Github repo, my LinkedIn, and my personal website.
-* The instructions on how to use the visualization will appear when the project is launched.
-* The center will contain an globe users can interact will to explore the data of our home.
+* The instructions will appear when the project is launched telling users how to use the visualization.
+* The center will contain an globe users can interact will to explore the data of our world.
 * When selecting a country, data for that country will be fetched from the EconDB API, and a table will appear showing the population data for that country.
 
 ```javascript
